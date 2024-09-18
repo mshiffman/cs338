@@ -2,16 +2,19 @@ Level 0->1
 ls
 cat readme
 ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+##ls to list files, cat to read them
 
 Level 1->2
 ls
 cat ./-
 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+##read files with names that start with a dash
 
 Level 2->3
 ls
 cat spaces\ in\ this\ filename 
 MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+##read files with names that contain spaces
 
 Level 3->4
 ls -a
@@ -19,45 +22,54 @@ cd inhere/
 ls -a
 cat ...Hiding-From-You
 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+##list and read hidden files 
 
 Level 4->5
 file ./-file00 ./-file01 ./-file02 ./-file03 ./-file04 ./-file05 ./-file06 ./-file07 ./-file08 ./-file09
 cat ./-file07
 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+##check file types
 
 Level 5->6
 find ./ -type f -size 1033c
 cd inhere/maybehere07/
 cat .file2
 HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+##use find with specifications for file type and size
 
 Level 6->7
 find / -user bandit7 -group bandit6 -size 33c 2>/dev/null
 cat /var/lib/dpkg/info/bandit7.password
 morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+##use find with specifications for user, group, size, and hide error messages
 
 Level 7->8
 ls
 grep millionth data.txt
 dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+##use grep to search files
 
 Level 8->9
 ls
 sort data.txt| uniq -u
 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+##use two commands at once, sort file contents, pull out unique file contents
 
 Level 9-10
 strings data.txt | grep ===
 FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+##pull out strings, search strings
 
 Level 10-11
 ls
 base64 --decode data.txt
 dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
+##decode base64 encryption
 
 Level 11-12
 ls
 cat data.txt | tr "A-Za-z" "N-ZA-Mn-za-m"
 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+##shift letters by 13, tr replaces A-Z with N-Z and A-M and replaxes a-z with n-z and a-m to shift letters by 13
 
 Level 12-13
