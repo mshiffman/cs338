@@ -1,0 +1,37 @@
+Mika Shiffman
+===== DAYTIME =====
+1)
+##would not let me copy the info section from the wireshark window
+1 192.168.64.2 129.6.15.28 TCP 60852->13 [SYN] Seq = 0 Win = 32120 .... 
+2 129.6.15.28 192.168.64.2 TCP 13-> 60852 [SYN, ACK] Seq = 0 Ack=1 Win=65535 ...
+3 192.168.64.2 129.6.15.28 TCP [ACK] Seq =1 Ack=1 Win=32128 Len = 0
+
+2)
+Uses port number 60852
+
+3)
+Since the TCP connection is a two-way handshake, the server must know the client port number in order to communicate back with the client.
+
+4)
+4 129.6.15.28 192.168.64.2 DAYTIME DAYTIME Response
+
+5)
+Synchronization Packet and Acknowledgment 
+
+6)
+nc client initiated the closing of the TCP connection as it is the client ip address that is the source for the first [FIN].
+
+===== HTTP =====
+1)
+Would only load 2 TCP connections if I used a normal window and would flag errors and not fully load the webpage but when I used a private window had hundreds of TCP connections? When I hit the stop button I was at 566 frames. Could tell that there were two TCP connections originally as different lines showed the differennt components of the handshake like [SYN] and [ACK]
+
+2)
+Yes, could tell where the homepage was requested because of the GET HTTP line in the wireshark window.
+28 192.168.64.2 172.233.221.124 HTTP GET /index.html HTTP/1.1
+
+3)
+Yes, could tell because fo the GET HTTP line in the wireshark window.
+32 192.168.64.2 172.233.221.124 HTTP GET /jeff-square-colorado.jpg HTTP/1.1
+
+===== QUESTIONS =====
+Why when I tried to load the webpage in the normal firefox browser lines would be highlighted in red and it would not load? Also why when I would load the webpage in the private firefox browser it loaded hundreds of frames?
