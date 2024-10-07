@@ -4,27 +4,35 @@ Mika Shiffman
 
 If AITM is impossible, then a good tool would be Diffie-Hellman. Alice and Bob use Diffie-Hellman to agree on a shared secret from which they derive an AES key K, which allows their communication to remain encrypted. The AES encryption is fast as it is a form of symmetric encryption.
 
+
 2. Alice wants to send Bob a long message. She doesn't want Mal to be able to modify the message without Bob detecting the change.
 
 Alice should just send Bob a message of the key K encrypted with bob's public key. Mal cannot change the message without Bob detecting the change as Bob should be the only one with the private key. Once they have exchanged key K, they cann use AES to symmetrically encrypt the messages.
+
 
 3.Alice wants to send Bob a long message (in this case, it's a signed contract between AliceCom and BobCom), she doesn't want Eve to be able to read it, and she wants Bob to have confidence that it was Alice who sent the message. Assume for this scenario that AITM is impossible.
 
 Since Alice and Bob have each others public keys, Bob can send Alice a number X to encrypt. Alice encrypts X using her private key, and Bob can confirm that it is her by decrypting the number with Alice's public key. Once they have agreed that they are speaking to the correct people, they can enrypt and send the K that they will then use to encrypt their remaining messages with AES encryption. 
 
+
 4. Consider a scenario where Alice and Bob have been in contract negotiations and sharing documents electronically along the way. Suppose Bob sues Alice for breach of contract and presents as evidence the digitally signed contract (C || Sig) and Alice's public key P_A. Here, C contains some indication that Alice has agreed to the contract—e.g., if C is a PDF file containing an image of Alice's handwritten signature. Sig, on the other hand is a digital signature, as described at 9:23 or so of the Cryptographic Hash Functions video. Suppose Alice says in court "C is not the contract I sent to Bob". (This is known as repudiation in cryptographic vocabulary.) Alice will now need to explain to the court what she believes happened that enabled Bob to end up with an erroneous contract. List at least three things Alice could claim happened. For each of Alice's claims, state briefly how plausible you would find the claim if you were the judge. (Assume that you, the judge, studied cryptography in college.)
 
+
 One thing Alice could claim is that Bob swapped the versions of the document. This can easily be verified as Sig is attached, which contains a hash of the original message. If the signature was created using the version of the document that was attached, then we can prove that Alice is wrong. Another thing Alice could claim is that Mal guessed her private key and swapped the document out. This is not plausible, given how large the integer range for the key values is. Another option is that Mal got ahold of Alice's private key. This would be possible if she has not been secure with it, like if she was sharing it with others.
+
 
 5.For this scenario, suppose the assumption that everybody has everybody else's correct public keys is no longer true. Instead, suppose we now have a certificate authority CA, and that everybody has the correct P_CA (i.e. the certificate authority's key). Suppose further that Bob sent his public key P_B to CA, and that CA then delivered to Bob this certificate: Cert_B = "bob.com" || P_B || Sig_CA. In terms of P_CA, S_CA, H, E, etc., of what would Sig_CA consist? That is, show the formula CA would use to compute Sig_CA.
 
 Sig_CA = (S_CA, H("bob".com || P_B))
 
+
 6. Bob now has the certificate Cert_B from the previous question. During a communication, Bob sends Alice Cert_B. Is that enough for Alice to believe she's talking to Bob? (Hint: no.) What could Alice and Bob do to convince Alice that Bob has the S_B that goes with the P_B in Cert_B?
 
 No since anyone could send Alice Bob's certificate. Alice could check that E(P_CA, Sig_CA) is equal to the H("bob.com" || P_B) and she could also check that that Bob has can decrypt something she sends encrypted with Bob's public key to ensure that he has the S_B to accompany the P_B.
 
+
 7. Finally, list at least two ways the certificate-based trust system from the previous two questions could be subverted, allowing Mal to convince Alice that Mal is Bob.
+
 One way the certificate-based trust system could be subverted is if there is an in-person breach of the certicate company where Mal could find the keys associated with Bob's certificate. Another way is if Mal obtains these keys through an employee of the certificate company.
 
 
