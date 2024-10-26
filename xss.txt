@@ -1,0 +1,40 @@
+Part 1: Cookies
+Go to FDF and use your browser's Inspector to take a look at your cookies for cs338.jeffondich.com. Are there cookies for that domain? What are their names and values?
+Yes, there is a cookie. The name is theme and the value is default. I don't see Set-Cookie which I do when using burpsuite.
+
+Using the "Theme" menu on the FDF page, change your theme to red or blue. Look at your cookies for cs338.jeffondich.com again. Did they change?
+Yes, the theme cookie has an updated value. I changed the theme to red so the value is now red.
+
+Do the previous two steps (examining cookies and changing the theme) using Burpsuite. What "Cookie:" and "Set-Cookie:" HTTP headers do you see? Do you see the same cookie values as you did with the Inspector?
+Set-Cookie: has the value "theme=default; Expires = Thu, 23 Jan 2025 18:19:39 GMT; Path =/". Cookie: has the value theme=default. Cookie has the same value but I did not see Set-Cookie when using Inspect. Set-Cookie: is a response header then Cookie: is a request header. 
+
+Quit your browser, relaunch it, and go back to the FDF. Is your red or blue theme (wherever you last left it) still selected?
+Yes, the red header is still selected. 
+
+How is the current theme transmitted between the browser and the FDF server?
+Cookie: theme=red is saved by the browser and sent to the server when we try and access the server again. It is sent with the request header.
+
+When you change the theme, how is the change transmitted between the browser and the FDF server?
+When I change the color, there is then a response header for Set-Cookie: that sets the theme to red, which then creates a request cookie, theme:red, and request header, Cookie: theme=red.
+
+How could you use your browser's Inspector to change the FDF theme without using the FDF's Theme menu?
+Go to where the cookie is saved and change the value associated with the theme name, then refresh the page.
+
+How could you use Burpsuite's Proxy tool to change the FDF theme without using the FDF's Theme menu?
+When using burpsuite, you can use the request query parameters to add theme and the color you want and send that to the server. 
+
+Where does your OS (the OS where you're running your browser and Burpsuite, that is) store cookies? (This will require some internet searching, most likely.)
+User > Library > Application Support> Google > Chrome > Default > Cookies
+
+Step 2: Cross-Site Scripting (XSS)
+Provide a diagram and/or a step-by-step description of the nature and timing of Moriarty's attack on users of the FDF. Note that some of the relevant actions may happen long before other actions.
+Moriarty writes a script that they put in their discussion post on the FDF and uploads their post to the discussion board. Then, whenever someone like Alice clicks the link to Moriarty's discussion post, the script executes as the page is loaded. 
+
+Describe an XSS attack that is more virulent than Moriarty's "turn something red" and "pop up a message" attacks. Think about what kinds of things the Javascript might have access to via Alice's browser when Alice views the attacker's post.
+One virulent attack is redirecting the user to a different site that could be malicious. It could be a site that looks like the original or one that could download things when alice views that page.
+
+Do it again: describe a second attack that is more virulent than Moriarty's, but that's substantially different from your first idea.
+Another attack that is more virulent than Moriarty's could be one that deletes all cookies or logs you out of the session. This could disrupt the user's experience and when paired with an attack like the previously mentioned one, you could get the user to log in again on your malicious site.
+
+What techniques can the server or the browser use to prevent what Moriarty is doing?
+One technique the server can do to prevent what Moriarty is doing is to make sure that the user input does not get executed like a script and that it gets treated like just a string.
