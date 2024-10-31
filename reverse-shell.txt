@@ -1,0 +1,109 @@
+Part 1
+Explain how you can execute the Linux command whoami on the server using your webshell. What result do you get when you execute that command?
+You can put it at the end of the webshell part like this: http://danger.jeffondich.com/uploadedimages/mshiffman-webshell.php?command=whoami. 
+I get the result www-data
+
+What is this webshell's <pre> tag for? (And more to the point, what happens if you leave it out?)
+The pre tag is so the html doesn't put everything on one line. Without the pre tag, the new line characters will be ignored and it will be harder to read information.
+
+Part 2
+What directory is danger's website located in?
+/var/www/
+
+What are the names of all the user accounts on danger.jeffondich.com? How do you know?
+bullwinkle
+jeff
+They are the names included in the home folder which is where users are typically listed.
+
+Do you have access to the file /etc/passwd? What's in it?
+Yes. It says what logins are needed. Output is below:
+  root:x:0:0:root:/root:/bin/bash
+  daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+  bin:x:2:2:bin:/bin:/usr/sbin/nologin
+  sys:x:3:3:sys:/dev:/usr/sbin/nologin
+  sync:x:4:65534:sync:/bin:/bin/sync
+  games:x:5:60:games:/usr/games:/usr/sbin/nologin
+  man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+  lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+  mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+  news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+  uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+  proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+  www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+  backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+  list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+  irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+  gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+  nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+  systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+  systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+  messagebus:x:102:105::/nonexistent:/usr/sbin/nologin
+  systemd-timesync:x:103:106:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+  syslog:x:104:111::/home/syslog:/usr/sbin/nologin
+  _apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+  tss:x:106:112:TPM software stack,,,:/var/lib/tpm:/bin/false
+  uuidd:x:107:113::/run/uuidd:/usr/sbin/nologin
+  tcpdump:x:108:114::/nonexistent:/usr/sbin/nologin
+  usbmux:x:109:46:usbmux daemon,,,:/var/lib/usbmux:/usr/sbin/nologin
+  sshd:x:110:65534::/run/sshd:/usr/sbin/nologin
+  pollinate:x:111:1::/var/cache/pollinate:/bin/false
+  landscape:x:112:116::/var/lib/landscape:/usr/sbin/nologin
+  fwupd-refresh:x:113:117:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+  jeff:x:1000:1000:Jeff Ondich,,,:/home/jeff:/bin/bash
+  postgres:x:114:119:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash
+  bullwinkle:x:1001:1001:Bullwinkle J. Moose,,,:/home/bullwinkle:/bin/bash
+
+
+Do you have access to the file /etc/shadow? What's in it? (You'll have to look online for the answer to that second question, since the answer to the first is no.)
+No. It has a line for each user containing information about their username, password, and activity. Source: https://linuxize.com/post/etc-shadow-file/
+
+There may be some secret files scattered around. See how many you can find and report on your discoveries.
+found:
+
+/secrets/kindasecret.txt
+            _   _
+           (.)_(.)
+        _ (   _   ) _
+       / \/`-----'\/ \
+     __\ ( (     ) ) /__
+     )   /\ \._./ /\   (
+      )_/ /|\   /|\ \_(
+
+/youwontfindthiswithgobuster/secret.txt
+   ___     ___
+  (o o)   (o o)
+ (  V  ) (  V  ) 
+/--m-m- /--m-m-
+
+/opt/more-secrets.txt
+/opt/.even-more-secrets.txt
+/home/jeff/supersecret.txt
+/   \          /   \
+\_   \        /  __/
+ _\   \      /  /__
+ \___  \____/   __/
+     \_       _/
+       | @ @  \_
+       |
+     _/     /\
+    /o)  (o/\ \_
+    \_____/ /
+      \____/
+
+/home/jeff/youfoundme.txt
+
+Part 4:
+What is the IP address of your Kali VM (the target machine)? How did you find out?
+I used ip a to find my ip address. My address is 192.168.64.2.
+
+What are the IP addresses of your host OS (the attacking machine)? How did you find out? Which one should you use to communicate with Kali and why?
+The IP addresses are 10.133.31.237 and 192.168.64.1. I found out using ifconfig |grep inet. IP addresses that begin with 10 are private internet ip addresses that people outside of the local network cannot communicate with. The 192 ip addresses are ones that my computer has created for communication on my device, including between my VM Kali and the terminal on my home OS. I will use the 192 address because its intended purpose is for communication between entities on my operating system.
+
+Go back and look at your nc -l -p terminal on your host OS (attacking machine). Do you have a shell now? Is it letting you execute commands on Kali? How do you know it's Kali?
+I have a shell and I can execute commands on Kali. One way I checked that it is Kali is by checking the ip address and the address that appears is the ip on Kali. I also can see the files in my directory and the files that appear are the ones I have in that folder on Kali. 
+
+What are all those % codes in the URL you used?
+Each of the % codes is an ascii encoding. Using the chart here: https://www.w3schools.com/tags/ref_urlencode.asp we can convert things like %20 back to a space and %22 to "
+
+Write a brief description, probably including a diagram, explaining how this reverse shell is functioning.
+This reverse shell is in a folder on Kali. Apache is a server that I am using to communicate from my host OS to Kali. On my host OS, I set up a listener using nc and a port number that I will use on my OS. The URL we use allows us to initate a connection from Kali to my host IP, where I can then write commands on my home OS that are sent to my Kali VM and executing using Kali's system. The results of those commands are viewable on my home OS because I am using nc as a listener.
