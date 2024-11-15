@@ -3,3 +3,4 @@ index.html contains the html code for the website
 post.html contains the information that was submitted by the user
 server2.py is a simple http python server needed to run the website
 static contains the jquery library
+secure.html contains the secure html code for the website (validates user input before POST)
