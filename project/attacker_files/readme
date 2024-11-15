@@ -1,1 +1,5 @@
+These files are necessary for the attack to work.
 
+The keylogger.html file contains the script to inject
+
+The index.php file takes the incoming php request from the site and puts the output into test.txt
