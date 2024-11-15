@@ -1,0 +1,36 @@
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device=width, initial-scale=1">
+    <title>Real Discussion Forum</title>
+    <link rel="import" href="post.html">
+    <link rel="icon" href="/static/favicon.ico">
+    <script src="/static/jquery-3.7.1.min.js"></script>
+    <script> 
+        $(function(){
+          $("#includedContent").load("post.html"); 
+        });
+        </script> 
+</head>
+
+<body>
+    <form id="login">
+        <label for="user">Username:</label><br>
+        <input type="text" id="user" name="Username"><br><br>
+        <label for="pass">Password:</label><br>
+        <input type="password" id="pass" name="Password"><br><br>
+        <input type="submit" value="login">
+    </form>
+    <br><br><br>
+    <form method="POST">
+        <textarea name="post" rows="5" cols="40"></textarea><br><br>
+        <input type="submit" value="submit post">
+    </form>
+    <div class="container">
+        <h1>Latest Post</h1>
+        <div id="includedContent"></div>
+        <iframe id="myIFrame" src="post.html" width="500" height="300"></iframe>
+    </div>
+</body>
+</html>
