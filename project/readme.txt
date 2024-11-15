@@ -1,5 +1,6 @@
 JavaScript Keylogger
 Created by Osareme Davis and Mika Shiffman
+
 Project Deliverables:
 - Demo vulnerable website
 - JavaScript Keylogger Program
@@ -25,5 +26,5 @@ On a browser, go to the webite (http://ip:port).
 Enter username and password as normal. Hit enter.
 
 Attacker:
-Open up file.txt. 
+Open up test.txt. 
 Check that the victim's username and password have been sent using a PHP request and put into the file.
