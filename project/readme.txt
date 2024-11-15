@@ -28,3 +28,5 @@ Enter username and password as normal. Hit enter.
 Attacker:
 Open up test.txt. 
 Check that the victim's username and password have been sent using a PHP request and put into the file.
+
+To run the secure version of the website, swap index.html with secure.html in server2.py
